@@ -23,12 +23,12 @@ public class RustWrapper {
         Pointer ptr = lib.hex_color_of(input);
         String result = ptr.getString(0);
         lib.free_string(ptr);
-        return result;
+        return "#"+result;
     }
     public static String altHexColorOf(String input) {
         Pointer ptr = lib.alt_hex_color_of(input);
         String result = ptr.getString(0);
         lib.free_string(ptr);
-        return result;
+        return "#"+result;
     }
 }
