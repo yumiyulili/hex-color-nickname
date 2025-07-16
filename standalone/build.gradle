@@ -36,11 +36,3 @@ tasks.register('copyDll', Copy) {
 
 processResources.dependsOn copyDll
 jar.dependsOn copyDll
-
-test {
-    systemProperty "java.library.path", "$projectDir/build/libs/native"
-}
-
-tasks.withType(JavaExec).configureEach {
-    systemProperty "java.library.path", "$projectDir/build/libs/native"
-}
