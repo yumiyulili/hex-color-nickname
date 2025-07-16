@@ -1,0 +1,5 @@
+name: hexnicks
+version: '1.0'
+main: ru.yumiyulili.hexnicks.HexNicks
+api-version: '1.20'
+authors: [ byteswing, yumiyulili ]
