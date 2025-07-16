@@ -10,10 +10,37 @@ repositories {
 }
 
 dependencies {
+    // https://mvnrepository.com/artifact/net.java.dev.jna/jna
+    implementation 'net.java.dev.jna:jna:5.17.0'
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
 test {
     useJUnitPlatform()
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs = ['src/main/resources']
+        }
+    }
+}
+
+tasks.register('copyDll', Copy) {
+    from 'src/main/resources/native'
+    into "$projectDir/build/libs/native"
+    include '**/*.dll', '**/*.so', '**/*.dylib'
+}
+
+processResources.dependsOn copyDll
+jar.dependsOn copyDll
+
+test {
+    systemProperty "java.library.path", "$projectDir/build/libs/native"
+}
+
+tasks.withType(JavaExec).configureEach {
+    systemProperty "java.library.path", "$projectDir/build/libs/native"
 }
